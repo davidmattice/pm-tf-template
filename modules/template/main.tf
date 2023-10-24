@@ -64,7 +64,7 @@ resource "proxmox_virtual_environment_vm" "template" {
 
   initialization {
     datastore_id = element(data.proxmox_virtual_environment_datastores.pve.datastore_ids, index(data.proxmox_virtual_environment_datastores.pve.datastore_ids, local.storage_volume))
-    interface    = "scsi4"
+    #interface    = "scsi4"
 
     dns {
       server = "1.1.1.1"
