@@ -21,8 +21,10 @@ ${SUDO} apt update && ${SUDO} apt install -y terraform
 
 ## Using TF for PVE
 
-- Set the PROXMOX_VE_PASSWORD environment variable
-- Clone the TF repo - https://github.com/davidmattice/proxmox-terraform
+- Set the Proxmox Provider password
+```
+export PROXMOX_VE_PASSWORD=""
+```
 
 
 ## Using Terraform
