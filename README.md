@@ -27,9 +27,43 @@ ${SUDO} apt update && ${SUDO} apt install -y terraform
 
 ## Using Terraform
 
+This is a little helper function to add to *.bashrc*
 ```
-terraform plan -var-file=env/pm1.tfvars -input=false -out=tf.plan
-terraform apply -input=false tf.plan
+function tf {
+    local tfvars_file=${2##*/}
+    local wksp=${tfvars_file%%.*}
+    local tf_cmd="/usr/bin/terraform"
+
+    # To help in debugging uncomment the line below
+    #echo "${tf_cmd}, ${2}, ${tfvars_file}, ${wksp}"
+
+    case "$1" in
+        plan)
+            rm -rf .terraform 2>/dev/null
+            ${tf_cmd} init -input=false
+            if [ $? -eq 0 ]; then
+                ${tf_cmd} workspace select ${wksp}
+                if [ $? -ne 0 ]; then
+                    ${tf_cmd} workspace new ${wksp}
+                fi
+                if [ $? -eq 0 ]; then
+                    ${tf_cmd} plan -input=false -out=${wksp}.plan -var-file=${2} ${*:3}
+                fi
+            fi
+            ;;
+        apply)
+            ${tf_cmd} apply -input=false ${wksp}.plan ${*:3}
+            ;;
+        *)
+            ${tf_cmd} $*
+            ;;
+    esac
+  }
+```
+Using the function above you can run a simplified plan and apply, or any other terraform command
+```
+tf plan env/pm1.tfvars [-destroy]
+tf apply env/file.tfvars [other options]
 ```
 
 ## The BPG Proxmox Terraform Provider

@@ -8,6 +8,9 @@ provider "proxmox" {
   }
 }
 
+provider "dns" {
+}
+
 terraform {
   required_version = ">= 1.6"
   required_providers {
@@ -15,5 +18,8 @@ terraform {
       source = "bpg/proxmox"
       version = "~> 0.35"
     }
+  }
+  backend "local" {
+    workspace_dir = "/mnt/terraform/state"
   }
 }
