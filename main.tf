@@ -11,9 +11,10 @@ module "template" {
   pve_endpoint    = var.pve_endpoint
   pve_user        = var.pve_user
   pve_template_id = var.pve_template_id
-  pve_template_version_tag = var.pve_template_version_tag
-  bios_type = var.bios_type
+  bios_type       = var.bios_type
   distro          = var.distro
   distro_name     = var.distro_name
   distro_url      = var.distro_url
+  additional_tags = var.additional_tags
+  pve_template_version_tag = var.pve_template_version_tag
 }
