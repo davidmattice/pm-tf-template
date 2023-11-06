@@ -1,6 +1,6 @@
 provider "proxmox" {
-  endpoint = var.pve_endpoint       # This will be picked up from PROXMOX_VE_ENDPOINT
-  username = var.pve_user           # This will be picked up from PROXMOX_VE_USERNAME
+  # endpoint = var.pve_endpoint     # This will be picked up from PROXMOX_VE_ENDPOINT
+  # username = var.pve_user         # This will be picked up from PROXMOX_VE_USERNAME
   # password = "a-strong-password"  # This will be picked up from PROXMOX_VE_PASSWORD
   insecure = true
   ssh {

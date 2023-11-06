@@ -8,8 +8,6 @@ module "template" {
   providers = {
     proxmox = proxmox
   }
-  pve_endpoint    = var.pve_endpoint
-  pve_user        = var.pve_user
   pve_template_id = var.pve_template_id
   bios_type       = var.bios_type
   distro          = var.distro
